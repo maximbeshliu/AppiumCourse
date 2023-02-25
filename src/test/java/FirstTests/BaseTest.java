@@ -27,6 +27,7 @@ public class BaseTest {
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("MaximPhone");
         options.setApp("C:\\Users\\Maxim\\IdeaProjects\\untitled\\src\\test\\resources\\apps\\General-Store.apk");
+        options.setChromedriverExecutable("C:\\Users\\Maxim\\IdeaProjects\\untitled\\src\\test\\resources\\drivers\\chromedriver.exe");
         try {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
