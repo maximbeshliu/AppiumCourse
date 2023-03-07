@@ -1,20 +1,20 @@
 package pages.android;
 
-import io.appium.java_client.android.AndroidDriver;
+import BaseTest.BasePage;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import static FirstTests.Utilities.scrollIntoView;
 
-public class FormPage {
-    AndroidDriver driver;
+public class FormPage extends BasePage {
 
-    public FormPage(AndroidDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(new AppiumFieldDecorator(driver),this);
+    public FormPage() {
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
+
 
     @AndroidFindBy(id = "com.androidsample.generalstore:id/nameField")
     private WebElement nameField;
@@ -28,27 +28,31 @@ public class FormPage {
     @AndroidFindBy(id = "com.androidsample.generalstore:id/spinnerCountry")
     private WebElement dropDown;
 
-    private final String countryName = "//android.widget.TextView[@text='%s']";
+    @AndroidFindBy(id = "com.androidsample.generalstore:id/btnLetsShop")
+    private WebElement submitBtn;
 
-    @AndroidFindBy(xpath = countryName)
-    private WebElement countryFromList;
-
-    public void setName(String name){
+    public void setName(String name) {
         nameField.sendKeys(name);
+        driver.hideKeyboard();
     }
 
-    public void selectGender(String gender){
-        if (gender.equalsIgnoreCase("female")){
+    public void selectGender(String gender) {
+        if (gender.equalsIgnoreCase("female")) {
             femaleRadioBtn.click();
-        }else {
+        } else {
             maleRadioBtn.click();
         }
     }
 
-    public void clickOnDropDownAndSelectCountry(String country){
+    public void clickOnDropDownAndSelectCountry(String country) {
         dropDown.click();
         scrollIntoView(driver, country);
-        String.format(countryName,country);
+        final String countryName = "//android.widget.TextView[@text='%s']";
+        WebElement countryFromList = driver.findElement(By.xpath(String.format(countryName, country)));
         countryFromList.click();
+    }
+
+    public void submiteForm() {
+        submitBtn.click();
     }
 }

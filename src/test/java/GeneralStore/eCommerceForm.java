@@ -1,27 +1,36 @@
 package GeneralStore;
 
 import BaseTest.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
-import static FirstTests.Utilities.scrollIntoView;
+import pages.android.FormPage;
+import pages.android.GoodsListPage;
 
 public class eCommerceForm extends BaseTest {
     @Test
     public void fillTheForm() throws InterruptedException {
-//        FormPage formPage = new FormPage(driver);
-//
-//        formPage.setName("Glasha");
-//        formPage.selectGender("female");
-//        formPage.clickOnDropDownAndSelectCountry("Angola");
+        FormPage formPage = new FormPage();
 
-        String modelName1 = "Jordan 6 Rings";
-        String xpath = "//android.widget.LinearLayout//android.widget.TextView[@text='%s']//following-sibling::android.widget.LinearLayout//android.widget.TextView[@text='ADD TO CART']";
-        driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
-        scrollIntoView(driver, "Albania");
-        WebElement country = driver.findElement(By.xpath("//android.widget.TextView[@text='Albania']"));
-        country.click();
+        formPage.setName("Max");
+        formPage.selectGender("male");
+        formPage.clickOnDropDownAndSelectCountry("Belgium");
+        formPage.submiteForm();
+
+        GoodsListPage goodsListPage = new GoodsListPage();
+
+        goodsListPage.chooseItem("Jordan 6 Rings");
+        goodsListPage.chooseItem("Nike SFB Jungle");
+
+        goodsListPage.goToShoppingCart().calcTotalPriceAndValidate();
+
+        goodsListPage.goToShoppingCart().checkAndAgreeWithTerms();
+
+
+//        String modelName1 = "Jordan 6 Rings";
+//        String xpath = "//android.widget.LinearLayout//android.widget.TextView[@text='%s']//following-sibling::android.widget.LinearLayout//android.widget.TextView[@text='ADD TO CART']";
+//        driver.findElement(By.id("com.androidsample.generalstore:id/spinnerCountry")).click();
+//        scrollIntoView(driver, "Albania");
+//        WebElement country = driver.findElement(By.xpath("//android.widget.TextView[@text='Albania']"));
+//        country.click();
 //        driver.findElement(By.id("com.androidsample.generalstore:id/nameField")).sendKeys("Glasha");
 //        driver.hideKeyboard();
 //        driver.findElement(By.id("com.androidsample.generalstore:id/radioFemale")).click();

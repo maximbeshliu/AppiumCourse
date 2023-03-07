@@ -15,6 +15,6 @@ public class Utilities {
     }
 
     public static void scrollIntoView(WebDriver driver,String text){
-        driver.findElement(AppiumBy.androidUIAutomator(String.format("new UiScrollable(new UiSelector()).scrollIntoView(text(\"%s\"));",text)));
+        driver.findElement(AppiumBy.androidUIAutomator(String.format("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(text(\"%s\"));",text)));
     }
 }
