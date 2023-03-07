@@ -1,5 +1,6 @@
 package FirstTests;
 
+import BaseTest.BaseTest;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
@@ -8,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.testng.annotations.Test;
 
-public class DragDemo extends BaseTest{
+public class DragDemo extends BaseTest {
 
     @Test
     public void dragTest() throws InterruptedException {

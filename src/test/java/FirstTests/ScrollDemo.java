@@ -1,11 +1,12 @@
 package FirstTests;
 
+import BaseTest.BaseTest;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 
-public class ScrollDemo extends BaseTest{
+public class ScrollDemo extends BaseTest {
 
     @Test
     public void scrollTest() throws InterruptedException {

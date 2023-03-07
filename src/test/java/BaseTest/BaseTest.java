@@ -1,4 +1,4 @@
-package FirstTests;
+package BaseTest;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -28,6 +28,7 @@ public class BaseTest {
         options.setDeviceName("MaximPhone");
         options.setApp("C:\\Users\\Maxim\\IdeaProjects\\untitled\\src\\test\\resources\\apps\\General-Store.apk");
         options.setChromedriverExecutable("C:\\Users\\Maxim\\IdeaProjects\\untitled\\src\\test\\resources\\drivers\\chromedriver.exe");
+        options.setCapability("noReset",true);
         try {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

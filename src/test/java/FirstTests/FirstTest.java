@@ -1,10 +1,11 @@
 package FirstTests;
 
+import BaseTest.BaseTest;
 import io.appium.java_client.AppiumBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class FirstTest extends BaseTest{
+public class FirstTest extends BaseTest {
 
     @Test
     public void appiumtTest() throws InterruptedException {

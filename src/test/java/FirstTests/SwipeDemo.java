@@ -1,5 +1,6 @@
 package FirstTests;
 
+import BaseTest.BaseTest;
 import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;

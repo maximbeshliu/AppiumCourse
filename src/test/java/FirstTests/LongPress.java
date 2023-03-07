@@ -1,5 +1,6 @@
 package FirstTests;
 
+import BaseTest.BaseTest;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

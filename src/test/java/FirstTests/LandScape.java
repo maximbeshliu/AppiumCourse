@@ -1,5 +1,6 @@
 package FirstTests;
 
+import BaseTest.BaseTest;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.nativekey.AndroidKey;
@@ -8,7 +9,7 @@ import org.openqa.selenium.DeviceRotation;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LandScape extends BaseTest{
+public class LandScape extends BaseTest {
 
     @Test
     public void appiumtTest() throws InterruptedException {
