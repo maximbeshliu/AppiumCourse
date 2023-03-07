@@ -1,4 +1,4 @@
-package BaseTest;
+package base;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -11,27 +11,28 @@ import java.io.File;
 import java.net.URL;
 import java.time.Duration;
 
-import static BaseTest.BasePage.driverSet;
+import static base.BasePage.driverSet;
+import static helpers.ConfigReader.readProperty;
 
 public class BaseTest {
-
     public static AndroidDriver driver;
     private static AppiumDriverLocalService service;
 
     public void setUp() {
         service = new AppiumServiceBuilder()
-                .withAppiumJS(new File("C:\\Users\\maxim.besliu\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js"))
-                .withIPAddress("127.0.0.1")
-                .usingPort(4723)
+                .withAppiumJS(new File(System.getProperty("user.home")+readProperty("PathToMainJs")))
+                .withIPAddress(readProperty("IPaddress"))
+                .usingPort(Integer.parseInt(readProperty("Port")))
                 .build();
         service.start();
+        service.clearOutPutStreams();
 
         UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName("MaximDevice");
-        options.setApp("C:\\Users\\maxim.besliu\\Desktop\\AppiumCourse\\src\\test\\resources\\app\\General-Store.apk");
-        options.setChromedriverExecutable("C:\\Users\\maxim.besliu\\Desktop\\AppiumCourse\\src\\test\\resources\\drivers\\chromedriver.exe");
+        options.setDeviceName(readProperty("DeviceName"));
+        options.setApp(System.getProperty("user.dir")+readProperty("app"));
+        options.setChromedriverExecutable(System.getProperty("user.dir")+readProperty("DriverPath"));
         try {
-            driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
+            driver = new AndroidDriver(new URL(readProperty("AppiumServerURL")), options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driverSet(driver);
         } catch (Exception e) {

@@ -16,3 +16,6 @@ app  path to apk
 deviceName emulatorname
 platformName  android
 automationName UiAutomator2
+
+
+https://www.linkedin.com/pulse/solving-jdk-17-compatibility-issue-appium-step-by-step-nir-tal/
