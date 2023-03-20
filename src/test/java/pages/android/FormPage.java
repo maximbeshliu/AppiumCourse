@@ -1,40 +1,27 @@
 package pages.android;
 
 import base.BasePage;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.codeborne.selenide.SelenideElement;
+import io.appium.java_client.AppiumBy;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
+import static com.codeborne.selenide.Selenide.$;
 import static helpers.CommonActions.scrollIntoView;
 
-public class FormPage extends BasePage {
+public class FormPage extends BasePage{
 
-    public FormPage() {
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
+    private SelenideElement nameField = $(AppiumBy.id("com.androidsample.generalstore:id/nameField"));
+    private SelenideElement femaleRadioBtn= $(AppiumBy.id("com.androidsample.generalstore:id/radioFemale"));
+    private SelenideElement maleRadioBtn= $(AppiumBy.id("com.androidsample.generalstore:id/radioMale"));
+    private SelenideElement dropDown= $(AppiumBy.id("com.androidsample.generalstore:id/spinnerCountry"));
+    private SelenideElement submitBtn= $(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop"));
 
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/nameField")
-    private WebElement nameField;
-
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/radioFemale")
-    private WebElement femaleRadioBtn;
-
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/radioMale")
-    private WebElement maleRadioBtn;
-
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/spinnerCountry")
-    private WebElement dropDown;
-
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/btnLetsShop")
-    private WebElement submitBtn;
 
     @Step("Customer introduces  name: {0}")
     public void setName(String name) {
         nameField.sendKeys(name);
-        driver.hideKeyboard();
     }
 
 

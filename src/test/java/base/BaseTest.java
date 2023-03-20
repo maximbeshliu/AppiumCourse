@@ -1,55 +1,47 @@
 package base;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.appium.SelenideAppium;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import customListeners.RetryAnalyzer;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
-import java.net.URL;
-import java.time.Duration;
+import java.util.Arrays;
 
-import static base.BasePage.driverSet;
 import static helpers.ConfigReader.readProperty;
 
+
 public class BaseTest {
-    public static AndroidDriver driver;
     private static AppiumDriverLocalService service;
 
-    public void setUp() {
+    @BeforeSuite
+    public void init(ITestContext context) {
+        Arrays.stream(context.getAllTestMethods()).forEach(x->x.setRetryAnalyzerClass(RetryAnalyzer.class));
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                .screenshots(true)
+                .savePageSource(false));
         service = new AppiumServiceBuilder()
-                .withAppiumJS(new File(System.getProperty("user.home")+readProperty("PathToMainJs")))
+                .withAppiumJS(new File(System.getProperty("user.home") + readProperty("PathToMainJs")))
                 .withIPAddress(readProperty("IPaddress"))
                 .usingPort(Integer.parseInt(readProperty("Port")))
                 .build();
         service.start();
         service.clearOutPutStreams();
 
-        UiAutomator2Options options = new UiAutomator2Options();
-        options.setDeviceName(readProperty("DeviceName"));
-        options.setApp(System.getProperty("user.dir")+readProperty("app"));
-        options.setChromedriverExecutable(System.getProperty("user.dir")+readProperty("DriverPath"));
-        try {
-            driver = new AndroidDriver(new URL(readProperty("AppiumServerURL")), options);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driverSet(driver);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        Configuration.browser = AndroidDriverInit.class.getName();
+        Configuration.timeout = 10000;
+        SelenideAppium.launchApp();
     }
 
-    @BeforeClass
-    public void init() {
-        setUp();
+    @AfterSuite
+    public void close() {
+        service.close();
     }
-
-    @AfterClass
-    public void teardown() {
-        driver.quit();
-        service.stop();
-    }
-
 
 }
