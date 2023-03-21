@@ -11,7 +11,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.net.URL;
 import java.time.Duration;
 
-import static base.BasePage.driverSet;
 import static helpers.ConfigReader.readProperty;
 
 @ParametersAreNonnullByDefault
@@ -21,7 +20,6 @@ public class AndroidDriverInit implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-
         UiAutomator2Options options = new UiAutomator2Options();
         options.merge(capabilities);
         options.setDeviceName(readProperty("DeviceName"));
@@ -34,7 +32,6 @@ public class AndroidDriverInit implements WebDriverProvider {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        driverSet(driver);
         return driver;
     }
 }

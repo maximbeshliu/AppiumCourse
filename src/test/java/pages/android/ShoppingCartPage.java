@@ -1,60 +1,52 @@
 package pages.android;
 
-import base.BasePage;
-import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.appium.AppiumDriverRunner;
+import io.appium.java_client.AppiumBy;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.List;
+import java.time.Duration;
 
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static helpers.CommonActions.longPress;
 
-public class ShoppingCartPage extends BasePage {
+public class ShoppingCartPage  {
 
-    public ShoppingCartPage() {
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-    }
-
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/productPrice")
-    private List<WebElement> productPrices;
-
+    private final ElementsCollection productPrices =$$(AppiumBy.id("com.androidsample.generalstore:id/productPrice"));
     private final String  cartXpath = "com.androidsample.generalstore:id/toolbar_title";
-    @AndroidFindBy(id = cartXpath)
-    private WebElement cartSign;
-
-    @AndroidFindBy(id = "com.androidsample.generalstore:id/termsButton")
-    private WebElement termAndConditions;
-
-    @AndroidFindBy(id = "android:id/button1")
-    private WebElement termsOkBtn;
-
-    @AndroidFindBy(xpath = "//android.widget.CheckBox[@text='Send me e-mails on discounts related to selected products in future']")
-    private WebElement termsAndConditionsCheckBox;
+    private final SelenideElement cartSign =$(AppiumBy.id(cartXpath));
+    private final String termAndConditions ="com.androidsample.generalstore:id/termsButton";
+    private final SelenideElement termsOkBtn =$(AppiumBy.id("android:id/button1"));
+    private final SelenideElement termsAndConditionsCheckBox =$(AppiumBy.xpath("//android.widget.CheckBox[@text='Send me e-mails on discounts related to selected products in futur']"));
 
     @Step("Customer validates total price")
     public void calcTotalPriceAndValidate(){
-        wait.until(ExpectedConditions.refreshed(ExpectedConditions.presenceOfElementLocated(By.id(cartXpath))));
-        wait.until(ExpectedConditions.attributeContains(cartSign,"text","Cart"));
+        new WebDriverWait(AppiumDriverRunner.getAndroidDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.refreshed(ExpectedConditions.presenceOfElementLocated(By.id(cartXpath))));
+        new WebDriverWait(AppiumDriverRunner.getAndroidDriver(), Duration.ofSeconds(10)).until(ExpectedConditions.attributeContains(cartSign,"text","Cart"));
         float priceTotal = 0;
         for (WebElement price: productPrices){
             String floatPrice = price.getText().replace("$","").trim();
             priceTotal += Float.parseFloat(floatPrice);
         }
-        String priceFromApp = driver.findElement(By.id("com.androidsample.generalstore:id/totalAmountLbl")).getText().replace("$"," ").trim();
+        String priceFromApp = AppiumDriverRunner.getAndroidDriver().findElement(By.id("com.androidsample.generalstore:id/totalAmountLbl")).getText().replace("$"," ").trim();
         Assert.assertEquals(Float.parseFloat(priceFromApp),priceTotal);
     }
 
     @Step("Customer agrees with all terms and conditions")
     public void checkAndAgreeWithTerms(){
-        longPress(driver,termAndConditions);
+        longPress(AppiumDriverRunner.getAndroidDriver(),termAndConditions,"id");
         termsOkBtn.click();
         termsAndConditionsCheckBox.click();
+
     }
+
 
 
 }
