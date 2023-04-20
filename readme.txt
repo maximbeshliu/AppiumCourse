@@ -33,6 +33,8 @@ emulator -list-avds (List of all emulators)
 
 emulator -avd {$emulatorName}
 
+adb emu kill
+
 
 !!! Before starting add start emulator
 
