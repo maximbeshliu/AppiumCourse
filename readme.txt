@@ -33,6 +33,8 @@ emulator -list-avds (List of all emulators)
 
 emulator -avd {$emulatorName}
 
+emulator -avd MaximPhone -wipe-data
+
 
 !!! Before starting add start emulator
 
