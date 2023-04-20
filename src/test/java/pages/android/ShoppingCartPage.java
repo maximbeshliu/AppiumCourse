@@ -24,7 +24,7 @@ public class ShoppingCartPage  {
     private final SelenideElement cartSign =$(AppiumBy.id(cartXpath));
     private final String termAndConditions ="com.androidsample.generalstore:id/termsButton";
     private final SelenideElement termsOkBtn =$(AppiumBy.id("android:id/button1"));
-    private final SelenideElement termsAndConditionsCheckBox =$(AppiumBy.xpath("//android.widget.CheckBox[@text='Send me e-mails on discounts related to selected products in futur']"));
+    private final SelenideElement termsAndConditionsCheckBox =$(AppiumBy.xpath("//android.widget.CheckBox[@text='Send me e-mails on discounts related to selected products in future']"));
 
     @Step("Customer validates total price")
     public void calcTotalPriceAndValidate(){

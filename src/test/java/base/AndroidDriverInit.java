@@ -26,7 +26,8 @@ public class AndroidDriverInit implements WebDriverProvider {
         options.setApp(System.getProperty("user.dir") + readProperty("appPath"));
         options.setChromedriverExecutable(System.getProperty("user.dir") + readProperty("DriverPath"));
         options.setPlatformName(readProperty("platform"));
-        options.setNewCommandTimeout(Duration.ofSeconds(10));
+        options.setAppWaitForLaunch(false);
+        options.setNewCommandTimeout(Duration.ofSeconds(30));
         try {
             driver = new AndroidDriver(new URL(readProperty("AppiumServerURL")), options);
         } catch (Exception e) {
