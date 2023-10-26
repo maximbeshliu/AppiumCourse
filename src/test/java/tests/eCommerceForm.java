@@ -1,8 +1,9 @@
 package tests;
 
-import base.BaseTest;
+import base.BaseTestAndroid;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.appium.AppiumDriverRunner;
+import io.appium.java_client.android.Activity;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import org.testng.annotations.BeforeMethod;
@@ -12,10 +13,14 @@ import pages.android.GoodsListPage;
 import pages.android.ShoppingCartPage;
 
 
-public class eCommerceForm extends BaseTest {
+public class eCommerceForm extends BaseTestAndroid {
+
+    Activity activity= new Activity("com.androidsample.generalstore",".MainActivity");
+
     @BeforeMethod
     public void backToMainPage() {
         Selenide.sleep(3000);
+        AppiumDriverRunner.getAndroidDriver().activateApp();
         if (!AppiumDriverRunner.getAndroidDriver().currentActivity().equals(".MainActivity")) {
             do {
                 AppiumDriverRunner.getAndroidDriver().pressKey(new KeyEvent(AndroidKey.BACK));
@@ -33,7 +38,7 @@ public class eCommerceForm extends BaseTest {
 
         GoodsListPage goodsListPage = new GoodsListPage();
 
-        goodsListPage.chooseItem("Jordan 6 Rings");
+        goodsListPage.chooseItem("Converse All Star");
         goodsListPage.goToShoppingCart();
 
         ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
@@ -41,7 +46,6 @@ public class eCommerceForm extends BaseTest {
         shoppingCartPage.calcTotalPriceAndValidate();
         shoppingCartPage.checkAndAgreeWithTerms();
     }
-
 
     @Test
     public void fillTheForm2() {
@@ -61,4 +65,5 @@ public class eCommerceForm extends BaseTest {
         shoppingCartPage.calcTotalPriceAndValidate();
         shoppingCartPage.checkAndAgreeWithTerms();
     }
+
 }

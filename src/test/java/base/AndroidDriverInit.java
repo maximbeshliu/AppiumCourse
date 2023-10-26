@@ -23,8 +23,8 @@ public class AndroidDriverInit implements WebDriverProvider {
         UiAutomator2Options options = new UiAutomator2Options();
         options.merge(capabilities);
         options.setDeviceName(readProperty("DeviceName"));
-        options.setApp(System.getProperty("user.dir") + readProperty("appPath"));
-        options.setChromedriverExecutable(System.getProperty("user.dir") + readProperty("DriverPath"));
+        options.setApp(readProperty("appPath"));
+        options.setChromedriverExecutable(readProperty("DriverPath"));
         options.setPlatformName(readProperty("platform"));
         options.setAppWaitForLaunch(false);
         options.setNewCommandTimeout(Duration.ofSeconds(30));
