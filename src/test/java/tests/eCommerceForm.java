@@ -20,7 +20,6 @@ public class eCommerceForm extends BaseTestAndroid {
     @BeforeMethod
     public void backToMainPage() {
         Selenide.sleep(3000);
-        AppiumDriverRunner.getAndroidDriver().activateApp();
         if (!AppiumDriverRunner.getAndroidDriver().currentActivity().equals(".MainActivity")) {
             do {
                 AppiumDriverRunner.getAndroidDriver().pressKey(new KeyEvent(AndroidKey.BACK));
