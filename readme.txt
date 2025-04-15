@@ -50,13 +50,6 @@ Command to see activity
 
 adb shell dumpsys window windows
 
-S/n M6V0F0663W
-Wifi bc:d0:74:65:9e:ea
-Ethernet type-c 00:e0:4c:68:0c:37
-Vault ECT5-8Y3G-MXK6-WV9M-O4G7-XTZJ
-IP 172.16.151.77
-
-
 env
 0960108580290
 
