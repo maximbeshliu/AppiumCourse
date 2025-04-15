@@ -70,16 +70,6 @@ export PATH=$ANDROID_SDK_ROOT:$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/tools/bin:$PATH
 
 
-Maib windows: Mb)^**$^*!)
-Mb)^**$^*!)
-
-Isim: El24432
-
-WI-FI
-BesliuM
-wrwsis5s
-
-
 How to run android and iOS emulator:
  https://vanessafsoares.medium.com/start-emulator-and-simulator-from-macos-terminal-aa345495170d
 
